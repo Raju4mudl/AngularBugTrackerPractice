@@ -3,6 +3,9 @@ import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
 import { BugTrackerComponent } from './bug-tracker/bug-tracker.component';
+import { FormsModule } from '@angular/forms';
+// import { Interface } from '@angular/Interface';
+
 
 @NgModule({
   declarations: [
@@ -10,7 +13,8 @@ import { BugTrackerComponent } from './bug-tracker/bug-tracker.component';
     BugTrackerComponent
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

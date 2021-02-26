@@ -1,7 +1,7 @@
 <section class="stats">
     <span class="closed">1</span>
     <span> / </span>
-    <span>2</span>
+    <span>{{bugLists.length}}</span>
 </section>
 <section class="sort">
     <label for="">Order By :</label>
@@ -14,21 +14,16 @@
 </section>
 <section class="edit">
     <label for="">Bug Name :</label>
-    <input type="text" name="" id="">
-    <input type="button" value="Add New">
+    <input type="text" name="" id="" [(ngModel)] = "newBugName">
+    <input type="button" value="Add New" (click) = "onClickAddNewBug()">
 </section>
 <section class="list">
     <ol>
-        <li>
-            <span class="bugname">[This is bug - 1]</span>
-            <div class="datetime">[createdAt]</div>
-            <input type="button" value="Remove">
-        </li>
-        <li>
-            <span class="bugname closed">[This is bug - 2]</span>
-            <div class="datetime">[createdAt]</div>
-            <input type="button" value="Remove">
+        <li *ngFor ="let bug of bugLists">
+            <span class="bugname" [ngClass] = "{closed : bug.isClosed}">{{bug.bugName}}</span>
+            <div class="datetime">{{bug.createdAt}}</div>
+            <input type="button" value="Remove" (click) = "onRemoveClick(bug)">
         </li>
     </ol>
-    <input type="button" value="Remove Closed">
+    <input type="button" value="Remove Closed" (click) = "onRemoveClosed()">
 </section>
