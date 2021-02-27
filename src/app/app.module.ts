@@ -4,13 +4,16 @@ import { NgModule } from '@angular/core';
 import { AppComponent } from './app.component';
 import { BugTrackerComponent } from './bug-tracker/bug-tracker.component';
 import { FormsModule } from '@angular/forms';
+import {TrimTextPipe} from './bug-tracker/pipes/TrimText.pipe';
+import { from } from 'rxjs';
 // import { Interface } from '@angular/Interface';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    BugTrackerComponent
+    BugTrackerComponent,
+    TrimTextPipe
   ],
   imports: [
     BrowserModule,

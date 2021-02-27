@@ -21,7 +21,7 @@
     <ol>
         <li *ngFor ="let bug of bugLists">
             <span class="bugname" [ngClass] = "{closed : bug.isClosed}" (click) = "onBugToToggle(bug)">
-                {{bug.bugName}}
+                {{bug.bugName | trimText}}
             </span>
             <div class="datetime">{{bug.createdAt}}</div>
             <input type="button" value="Remove" (click) = "onRemoveClick(bug)">
