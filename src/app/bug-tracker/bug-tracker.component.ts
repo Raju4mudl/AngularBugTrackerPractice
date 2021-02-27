@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { from } from 'rxjs';
 import { Bug } from './models/Bug';
+import {BugOperationsService} from './services/BugOperations.service';
 
 @Component({
   selector: 'app-bug-tracker',
@@ -8,32 +10,37 @@ import { Bug } from './models/Bug';
 })
 export class BugTrackerComponent implements OnInit {
 
+
   bugLists : Bug[] = [];
   newBugName : String = '';
  
   id : number = 1;
 
+  constructor(private bugOperation : BugOperationsService) { }
 
   onClickAddNewBug(){
-    const newBug : Bug = {
-      id : this.id++,
-      bugName : this.newBugName,
-      isClosed : false,
-      createdAt : new Date()
-    }
+    const newBug = this.bugOperation.createNewBug(this.newBugName);
     this.bugLists.push(newBug);
 
   }
   onRemoveClick(bugToRemove : Bug){
-    bugToRemove.isClosed = true;
+    //bugToRemove.isClosed = true;
+    this.bugLists = this.bugLists.filter(bug => bugToRemove != bug);
 
   }
 
+  onBugToToggle(bug : Bug){
+    this.bugOperation.toggle(bug);
+  }
   onRemoveClosed(){
     this.bugLists = this.bugLists.filter(bug => bug.isClosed == false)
   }
 
-  constructor() { }
+  getClosedBugCount() : number {
+    return this.bugLists.reduce((closedCount, bug) => bug.isClosed? closedCount + 1 : closedCount ,0);
+  }
+
+  
 
   ngOnInit(): void {
   }
